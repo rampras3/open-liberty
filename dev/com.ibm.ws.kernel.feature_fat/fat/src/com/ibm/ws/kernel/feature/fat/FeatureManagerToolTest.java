@@ -1186,9 +1186,9 @@ public class FeatureManagerToolTest extends FeatureToolTestCommon {
         LibertyFileManager.copyFileIntoLiberty(server.getMachine(), server.getInstallRoot() + "/lib/fixes", "publish/features/iFix1.lpmf");
 
         // Now install the feature
-        filesToTidy.add("lib/features/usertest.mf");
+        filesToTidy.add("lib/features/usertest1.mf");
         filesToTidy.add("lib/usertest_1.0.0.jar");
-        ProgramOutput po = server.installFeature(CORE_PRODUCT_NAME, "usertest");
+        ProgramOutput po = server.installFeature(CORE_PRODUCT_NAME, "usertest1");
 
         Log.info(c, METHOD_NAME, po.getStdout());
 
