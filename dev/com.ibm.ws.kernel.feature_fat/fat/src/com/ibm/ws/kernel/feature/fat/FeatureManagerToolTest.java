@@ -1188,7 +1188,7 @@ public class FeatureManagerToolTest extends FeatureToolTestCommon {
         // Now install the feature
         filesToTidy.add("lib/features/usertest1.mf");
         filesToTidy.add("lib/usertest_1.0.0.jar");
-        ProgramOutput po = server.installFeature(CORE_PRODUCT_NAME, "usertest1");
+        ProgramOutput po = server.installFeature(CORE_PRODUCT_NAME, "usertest_core");
 
         Log.info(c, METHOD_NAME, po.getStdout());
 
@@ -1204,7 +1204,7 @@ public class FeatureManagerToolTest extends FeatureToolTestCommon {
      */
     @Test
     public void testExistingBundles() throws Exception {
-        final String METHOD_NAME = "testIFixedJar";
+        final String METHOD_NAME = "testExistingBundles";
         Log.entering(c, METHOD_NAME);
 
         ProgramOutput po = server.installFeature(null, "usertest");
@@ -1225,7 +1225,7 @@ public class FeatureManagerToolTest extends FeatureToolTestCommon {
      */
     @Test
     public void testExistingBundlesWithIgnore() throws Exception {
-        final String METHOD_NAME = "testIFixedJar";
+        final String METHOD_NAME = "testExistingBundlesWithIgnore";
         Log.entering(c, METHOD_NAME);
 
         ProgramOutput po = server.installFeature(null, "usertest");
