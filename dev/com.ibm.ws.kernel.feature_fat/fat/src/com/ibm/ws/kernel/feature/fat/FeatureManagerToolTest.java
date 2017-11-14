@@ -1199,6 +1199,28 @@ public class FeatureManagerToolTest extends FeatureToolTestCommon {
         Log.exiting(c, METHOD_NAME);
     }
 
+    @Test
+    public void testIFixedJarFeatureManager() throws Exception {
+        final String METHOD_NAME = "testIFixedJarusingFeatureManaaer";
+        Log.entering(c, METHOD_NAME);
+        // First install the ifix
+        this.filesToTidy.add("lib/fixes/iFix1.xml");
+        this.filesToTidy.add("lib/fixes/iFix1.lpmf");
+        LibertyFileManager.copyFileIntoLiberty(server.getMachine(), server.getInstallRoot() + "/lib/fixes", "publish/features/iFix1.xml");
+        LibertyFileManager.copyFileIntoLiberty(server.getMachine(), server.getInstallRoot() + "/lib/fixes", "publish/features/iFix1.lpmf");
+
+        ProgramOutput po = installServer.getMachine().execute(installServer.getInstallRoot() + "/bin/featureManager",
+                                                              new String[] { "install", "--to=core", "lib/features/usertest_core.esa" },
+                                                              installServer.getInstallRoot());
+
+        assertEquals("The feature should have been installed. stdout:\r\n" + po.getStdout(), 0, po.getReturnCode());
+        assertTrue("A message saying the iFix would need to be applied should have been printed:\r\n" + po.getStdout(),
+                   po.getStdout().contains("iFix1"));
+
+        Log.exiting(c, METHOD_NAME);
+
+    }
+
     /**
      * Test for defect 97183: Make sure the message is correct for default params when a bundle already exists
      */
