@@ -1210,7 +1210,7 @@ public class FeatureManagerToolTest extends FeatureToolTestCommon {
         LibertyFileManager.copyFileIntoLiberty(server.getMachine(), server.getInstallRoot() + "/lib/fixes", "publish/features/iFix1.lpmf");
 
         ProgramOutput po = installServer.getMachine().execute(installServer.getInstallRoot() + "/bin/featureManager",
-                                                              new String[] { "install", "--to=core", "lib/features/usertest_core.esa" },
+                                                              new String[] { "install", "--to=core", "usertest_core.esa", "--from=lib/features" },
                                                               installServer.getInstallRoot());
 
         assertEquals("The feature should have been installed. stdout:\r\n" + po.getStdout(), 0, po.getReturnCode());
