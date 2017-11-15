@@ -1180,24 +1180,24 @@ public class FeatureManagerToolTest extends FeatureToolTestCommon {
      * public void testIFixedJar() throws Exception {
      * final String METHOD_NAME = "testIFixedJar";
      * Log.entering(c, METHOD_NAME);
-     * 
+     *
      * // First install the ifix
      * this.filesToTidy.add("lib/fixes/iFix1.xml");
      * this.filesToTidy.add("lib/fixes/iFix1.lpmf");
      * LibertyFileManager.copyFileIntoLiberty(server.getMachine(), server.getInstallRoot() + "/lib/fixes", "publish/features/iFix1.xml");
      * LibertyFileManager.copyFileIntoLiberty(server.getMachine(), server.getInstallRoot() + "/lib/fixes", "publish/features/iFix1.lpmf");
-     * 
+     *
      * // Now install the feature
      * filesToTidy.add("lib/features/usertest1.mf");
      * filesToTidy.add("lib/usertest_1.0.0.jar");
      * ProgramOutput po = server.installFeature(CORE_PRODUCT_NAME, "usertest_core");
-     * 
+     *
      * Log.info(c, METHOD_NAME, po.getStdout());
-     * 
+     *
      * assertEquals("The feature should have been installed. stdout:\r\n" + po.getStdout(), 0, po.getReturnCode());
      * assertTrue("A message saying the iFix would need to be applied should have been printed:\r\n" + po.getStdout(),
      * po.getStdout().contains("iFix1"));
-     * 
+     *
      * Log.exiting(c, METHOD_NAME);
      * }
      */
@@ -1211,11 +1211,10 @@ public class FeatureManagerToolTest extends FeatureToolTestCommon {
         this.filesToTidy.add("lib/fixes/iFix1.lpmf");
         LibertyFileManager.copyFileIntoLiberty(server.getMachine(), server.getInstallRoot() + "/lib/fixes", "publish/features/iFix1.xml");
         LibertyFileManager.copyFileIntoLiberty(server.getMachine(), server.getInstallRoot() + "/lib/fixes", "publish/features/iFix1.lpmf");
-
-        ProgramOutput po = installServer.getMachine().execute(installServer.getInstallRoot() + "/bin/featureManager",
-                                                              new String[] { "install", "usertest_core.esa", "--to=core",
-                                                                             "--from=" + installServer.getInstallRoot() + "lib/features" },
-                                                              installServer.getInstallRoot());
+        ProgramOutput po = server.getMachine().execute(server.getInstallRoot() + "/bin/featureManager",
+                                                       new String[] { "install", "usertest_core.esa", "--to=core",
+                                                                      "--from=" + installServer.getInstallRoot() + "lib/features" },
+                                                       server.getInstallRoot());
 
         assertEquals("The feature should have been installed. stdout:\r\n" + po.getStdout(), 0, po.getReturnCode());
         assertTrue("A message saying the iFix would need to be applied should have been printed:\r\n" + po.getStdout(),
