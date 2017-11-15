@@ -1174,30 +1174,33 @@ public class FeatureManagerToolTest extends FeatureToolTestCommon {
     /**
      * This tests that when an ESA is installed that adds a JAR that had been previously ifixed then it should print a warning.
      */
-    @Test
-    public void testIFixedJar() throws Exception {
-        final String METHOD_NAME = "testIFixedJar";
-        Log.entering(c, METHOD_NAME);
 
-        // First install the ifix
-        this.filesToTidy.add("lib/fixes/iFix1.xml");
-        this.filesToTidy.add("lib/fixes/iFix1.lpmf");
-        LibertyFileManager.copyFileIntoLiberty(server.getMachine(), server.getInstallRoot() + "/lib/fixes", "publish/features/iFix1.xml");
-        LibertyFileManager.copyFileIntoLiberty(server.getMachine(), server.getInstallRoot() + "/lib/fixes", "publish/features/iFix1.lpmf");
-
-        // Now install the feature
-        filesToTidy.add("lib/features/usertest1.mf");
-        filesToTidy.add("lib/usertest_1.0.0.jar");
-        ProgramOutput po = server.installFeature(CORE_PRODUCT_NAME, "usertest_core");
-
-        Log.info(c, METHOD_NAME, po.getStdout());
-
-        assertEquals("The feature should have been installed. stdout:\r\n" + po.getStdout(), 0, po.getReturnCode());
-        assertTrue("A message saying the iFix would need to be applied should have been printed:\r\n" + po.getStdout(),
-                   po.getStdout().contains("iFix1"));
-
-        Log.exiting(c, METHOD_NAME);
-    }
+    /*
+     * @Test
+     * public void testIFixedJar() throws Exception {
+     * final String METHOD_NAME = "testIFixedJar";
+     * Log.entering(c, METHOD_NAME);
+     * 
+     * // First install the ifix
+     * this.filesToTidy.add("lib/fixes/iFix1.xml");
+     * this.filesToTidy.add("lib/fixes/iFix1.lpmf");
+     * LibertyFileManager.copyFileIntoLiberty(server.getMachine(), server.getInstallRoot() + "/lib/fixes", "publish/features/iFix1.xml");
+     * LibertyFileManager.copyFileIntoLiberty(server.getMachine(), server.getInstallRoot() + "/lib/fixes", "publish/features/iFix1.lpmf");
+     * 
+     * // Now install the feature
+     * filesToTidy.add("lib/features/usertest1.mf");
+     * filesToTidy.add("lib/usertest_1.0.0.jar");
+     * ProgramOutput po = server.installFeature(CORE_PRODUCT_NAME, "usertest_core");
+     * 
+     * Log.info(c, METHOD_NAME, po.getStdout());
+     * 
+     * assertEquals("The feature should have been installed. stdout:\r\n" + po.getStdout(), 0, po.getReturnCode());
+     * assertTrue("A message saying the iFix would need to be applied should have been printed:\r\n" + po.getStdout(),
+     * po.getStdout().contains("iFix1"));
+     * 
+     * Log.exiting(c, METHOD_NAME);
+     * }
+     */
 
     @Test
     public void testIFixedJarFeatureManager() throws Exception {
