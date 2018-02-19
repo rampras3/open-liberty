@@ -12,11 +12,31 @@
 
 -nobundles=true
 
+
 test.project: true
+
+-buildpath: \
+	../build.sharedResources/lib/junit/old/junit.jar;version=file, \
+	org.hamcrest:hamcrest-all;version=1.3, \
+	org.jmock:jmock-junit4;strategy=exact;version=2.5.1, \
+	org.jmock:jmock;strategy=exact;version=2.5.1, \
+	com.ibm.ws.kernel.boot.core;version=latest, \
+	com.ibm.ws.kernel.feature;version=latest,\
+	com.ibm.ws.kernel.feature.provisioning;version=latest,\
+	com.ibm.ws.kernel.feature.internal.cmdline;version=latest, \
+	com.ibm.ws.kernel.feature.core;version=latest, \
+	com.ibm.ws.product.utility;version=latest, \
+	com.ibm.ws.repository;version=latest, \
+	wlp.lib.extract;version=latest, \
+	com.ibm.ws.install;version=latest,\
+	wlp.lib.extract;version=latest,\
+	com.ibm.ws.install.internal;version=latest
+
 
 -testpath: \
 	org.hamcrest:hamcrest-all;version=1.3, \
 	../build.sharedResources/lib/junit/old/junit.jar;version=file, \
+	../build.sharedResources/lib/ws-junit/ws-junit.jar;version=file, \
 	com.ibm.ws.junit.extensions;version=latest, \
 	org.jmock:jmock-junit4;strategy=exact;version=2.5.1, \
 	org.jmock:jmock;strategy=exact;version=2.5.1, \
@@ -32,6 +52,7 @@ test.project: true
 	com.ibm.ws.product.utility;version=latest,\
 	com.ibm.ws.repository;version=latest,\
 	com.ibm.ws.install;version=latest,\
+	com.ibm.ws.install.internal;version=latest,\
 	wlp.lib.extract;version=latest,\
 	com.ibm.websphere.org.osgi.service.component;version=latest,\
 	com.ibm.wsspi.org.osgi.service.component.annotations
