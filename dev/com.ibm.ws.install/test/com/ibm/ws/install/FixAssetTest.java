@@ -51,7 +51,7 @@ public class FixAssetTest {
     @Test
     public void testInvalidFix() {
         final String m = "testInvalidFix";
-        File jarFile = new File("../com.ibm.ws.install_test/publish/massiveRepo/features/invalid.esa");
+        File jarFile = new File("../publish/massiveRepo/features/invalid.esa");
         try {
             new FixAsset("invalid", jarFile, true);
             fail("FixAsset should not be created");
@@ -65,7 +65,7 @@ public class FixAssetTest {
     @Test
     public void testFixAsset() throws MalformedURLException, IOException {
         final String m = "testFixAsset";
-        File srcFile = new File("../com.ibm.ws.install_test/publish/massiveRepo/fixes/8550-wlp-archive-ifpm89011.jar");
+        File srcFile = new File("../publish/massiveRepo/fixes/8550-wlp-archive-ifpm89011.jar");
         File fixFile = new File("build/unittest/tmp/8550-wlp-archive-ifpm89011-temp.jar");
         new InputStreamFileWriter(srcFile.getCanonicalFile().toURI().toURL().openConnection().getInputStream()).writeToFile(fixFile);
         try {

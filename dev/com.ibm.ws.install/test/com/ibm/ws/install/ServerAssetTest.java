@@ -67,7 +67,7 @@ public class ServerAssetTest {
     public void testGetServerAssetName() throws Exception {
         initializeTestCase("testGetServerAssetName");
 
-        File sServerXML = new File("../com.ibm.ws.install_test/publish/servers/serverA/server.xml");
+        File sServerXML = new File("../publish/servers/serverA/server.xml");
         File dServerXML = new File(testDir, "server.xml");
 
         try {

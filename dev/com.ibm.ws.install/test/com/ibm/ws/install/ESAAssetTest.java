@@ -56,7 +56,7 @@ public class ESAAssetTest {
     @Test
     public void testInvalidESA() {
         final String m = "testInvalidESA";
-        File esaFile = new File("../com.ibm.ws.install_test/publish/massiveRepo/features/invalid.esa");
+        File esaFile = new File("../publish/massiveRepo/features/invalid.esa");
         try {
             new ESAAsset("usertest.with.ibm.license", "usertest.with.ibm.license", "", esaFile, true);
             fail("ESAAsset should not be created");
@@ -70,7 +70,7 @@ public class ESAAssetTest {
     @Test
     public void testESAAsset() throws IOException {
         final String m = "testESAAsset";
-        File srcFile = new File("../com.ibm.ws.install_test/publish/massiveRepo/features/usertest.with.ibm.license.esa");
+        File srcFile = new File("../publish/massiveRepo/features/usertest.with.ibm.license.esa");
         File esaFile = new File("build/unittest/tmp/usertest.with.ibm.license_temp.esa");
         new InputStreamFileWriter(srcFile.getCanonicalFile().toURI().toURL().openConnection().getInputStream()).writeToFile(esaFile);
 
