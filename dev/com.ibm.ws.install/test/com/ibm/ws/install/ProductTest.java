@@ -94,7 +94,7 @@ public class ProductTest {
         }
         assertTrue("Product.containsFeature(\"cik.simple.feature-1.0\")", p.containsFeature("cik.simple.feature-1.0"));
 
-        assertEquals("Product.getFeatureDefinitions()", 87, p.getFeatureDefinitions().size());
+        assertEquals("Product.getFeatureDefinitions()", 89, p.getFeatureDefinitions().size());
         assertEquals("Product.getFeatureCollectionDefinitions()", 1, p.getFeatureCollectionDefinitions().size());
 
         System.out.println(p.getAcceptedLicenses());

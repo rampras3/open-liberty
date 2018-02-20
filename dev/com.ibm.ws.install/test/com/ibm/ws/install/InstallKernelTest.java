@@ -280,7 +280,13 @@ public class InstallKernelTest {
     @Test
     public void testInstallKernel_getInstalledLicense() {
         InstallKernel installKernel = InstallKernelFactory.getInstance(imageDir);
-        assertEquals("InstallKernel.getInstalledLicense()", 1, installKernel.getInstalledLicense().size());
+
+        Set<String> licenses = installKernel.getInstalledLicense();
+        for (String l : licenses) {
+
+            System.out.println("Returned Licenses: " + l);
+        }
+        assertEquals("InstallKernel.getInstalledLicense()", 2, installKernel.getInstalledLicense().size());
     }
 
     @Test
@@ -290,7 +296,7 @@ public class InstallKernelTest {
         assertEquals("InstallKernel.getInstalledFeatures(\"core\")", 86, features.size());
         assertTrue("InstallKernel.getInstalledFeatures(\"core\") contains com.ibm.websphere.appserver.logging-1.0", features.contains("com.ibm.websphere.appserver.logging-1.0"));
         features = installKernel.getInstalledFeatures(InstallConstants.TO_USER);
-        assertEquals("InstallKernel.getInstalledFeatures(\"usr\")", 0, features.size());
+        assertEquals("InstallKernel.getInstalledFeatures(\"usr\")", 2, features.size());
         features = installKernel.getInstalledFeatures("extension");
         assertEquals("InstallKernel.getInstalledFeatures(\"extension\")", 0, features.size());
     }
