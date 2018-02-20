@@ -63,7 +63,7 @@ public class CheckFileLockedTest {
 
     @Test
     public void testESAAdaptorPreCheck() throws Exception {
-        File srcFile = new File("../publish/massiveRepo/features/usertest.with.ibm.license.esa");
+        File srcFile = new File("publish/massiveRepo/features/usertest.with.ibm.license.esa");
         File esaFile = new File("build/unittest/tmp/usertest.with.ibm.license_temp.esa");
         new InputStreamFileWriter(srcFile.getCanonicalFile().toURI().toURL().openConnection().getInputStream()).writeToFile(esaFile);
         ESAAsset esaAsset = new ESAAsset("usertest.with.ibm.license", "usertest.with.ibm.license", "usr", esaFile, true);
