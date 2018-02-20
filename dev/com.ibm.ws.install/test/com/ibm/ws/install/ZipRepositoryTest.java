@@ -39,7 +39,7 @@ public class ZipRepositoryTest {
     @Test
     public void testValidIndexFile() {
         try {
-            File indexFile = new File("testDatat/zips/com.ibm.websphere.liberty.repo.core.manifest_8.5.5005.zip");
+            File indexFile = new File("testData/zips/com.ibm.websphere.liberty.repo.core.manifest_8.5.5005.zip");
             ZipRepository zipRepo = (ZipRepository) RepositoryFactory.getInstance(new ZipFile(indexFile));
             Collection<FeatureAsset> fas = zipRepo.getFeatures("com.ibm.websphere.appserver", "8.5.5.5", "InstallationManager", "ILAN", "ND");
             assertNotNull("getFeatures() should not return null", fas);
