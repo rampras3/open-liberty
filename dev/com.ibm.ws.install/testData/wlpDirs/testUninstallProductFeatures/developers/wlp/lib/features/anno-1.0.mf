@@ -1,0 +1,19 @@
+Subsystem-ManifestVersion: 1.0
+Subsystem-SymbolicName: com.ibm.websphere.appserver.anno-1.0
+Subsystem-Version: 1.0.0
+Subsystem-Content: com.ibm.ws.anno; version="[1,1.0.100)",
+ com.ibm.ws.javaee.annotation.1.1; version="[1,1.0.100)"; location:="dev/api/spec/,lib/",
+ com.ibm.websphere.appserver.artifact-1.0; type="osgi.subsystem.feature",
+ com.ibm.websphere.appserver.spi.anno; location:="dev/spi/ibm/com.ibm.websphere.appserver.spi.anno_1.0.0.jar"; type="jar",
+ com.ibm.websphere.appserver.spi.anno_1.0.0-javadoc.zip; location:="dev/spi/ibm/javadoc/com.ibm.websphere.appserver.spi.anno_1.0.0-javadoc.zip"; type="file"
+Subsystem-Type: osgi.subsystem.feature 
+IBM-Feature-Version: 2
+IBM-API-Package: javax.annotation; type="spec",
+ javax.annotation.security; type="spec",
+ javax.annotation.sql; type="spec"
+IBM-SPI-Package: com.ibm.wsspi.anno.classsource,
+ com.ibm.wsspi.anno.info,
+ com.ibm.wsspi.anno.service,
+ com.ibm.wsspi.anno.targets,
+ com.ibm.wsspi.anno.util
+IBM-ProductID: com.ibm.websphere.appserver

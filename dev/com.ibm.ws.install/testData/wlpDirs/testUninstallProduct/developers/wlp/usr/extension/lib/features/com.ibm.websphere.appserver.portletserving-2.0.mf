@@ -1,0 +1,18 @@
+Manifest-Version: 1.0
+Subsystem-ManifestVersion: 1.0
+Subsystem-Name: %name
+Subsystem-Version: 2.0.1
+Subsystem-Description: %description
+Subsystem-Type: osgi.subsystem.feature
+Subsystem-Localization: OSGI-INF/l10n/subsystem
+Subsystem-SymbolicName: com.ibm.websphere.appserver.portletserving-2.0; visibility:=public
+Subsystem-License: http://www.ibm.com/licenses/L-KCAL-9DPNSC
+Subsystem-Vendor: IBM
+Subsystem-Content: com.ibm.ws.portletserving;version="2.0",
+ com.ibm.websphere.appserver.portlet-2.0; type="osgi.subsystem.feature"
+IBM-Feature-Version: 2
+IBM-ShortName: portletserving-2.0
+IBM-AppliesTo: com.ibm.websphere.appserver
+IBM-License-Agreement: wlp/lafiles/LA
+IBM-License-Information: wlp/lafiles/LI
+IBM-InstallTo: usr

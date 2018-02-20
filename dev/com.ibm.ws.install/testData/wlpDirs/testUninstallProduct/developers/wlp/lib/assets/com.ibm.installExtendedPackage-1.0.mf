@@ -1,0 +1,20 @@
+Manifest-Version: 1.0
+Subsystem-Localization: OSGI-INF/l10n/subsystem
+IBM-ShortName: installExtendedPackage-1.0
+IBM-Feature-Version: 2
+Subsystem-Version: 1.0.0
+Subsystem-Description: %description
+Subsystem-ManifestVersion: 1
+Subsystem-Content:   com.ibm.genericCoreFeatureDependancyOnEsaPass; ty
+ pe="osgi.subsystem.feature", com.ibm.genericCoreFeatureModifyA; type=
+ "osgi.subsystem.feature"
+IBM-License-Agreement: wlp/lafiles/LA
+IBM-AppliesTo: com.ibm.websphere.appserver; productEdition="BASE,DEVEL
+ OPERS,EXPRESS,ND,zOS"; productInstallType=InstallationManager;
+Subsystem-SymbolicName: com.ibm.installExtendedPackage-1.0; visibility
+ :=install
+Subsystem-Name: %name
+Subsystem-Type: osgi.subsystem.feature
+Subsystem-License: http://www.ibm.com/licenses/wlp-featureterms-v1
+IBM-InstallTo: core
+IBM-ProductID: com.ibm.websphere.appserver

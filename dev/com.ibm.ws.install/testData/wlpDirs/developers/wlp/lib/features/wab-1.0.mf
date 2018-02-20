@@ -1,0 +1,13 @@
+Manifest-Version: 1.0
+Subsystem-ManifestVersion: 1.0
+IBM-ShortName: wab-1.0
+Subsystem-SymbolicName: com.ibm.websphere.appserver.wab-1.0;visibility:=public
+Subsystem-Version: 1.0.0
+Subsystem-Content: com.ibm.wsspi.appserver.webBundle-1.0; type="osgi.subsystem.feature", 
+ com.ibm.websphere.appserver.blueprint-1.0; type="osgi.subsystem.feature"
+Subsystem-Type: osgi.subsystem.feature 
+IBM-Feature-Version: 2
+Subsystem-Name: %name
+Subsystem-Description: %description
+Subsystem-Localization: OSGI-INF/l10n/subsystem
+IBM-ProductID: com.ibm.websphere.appserver

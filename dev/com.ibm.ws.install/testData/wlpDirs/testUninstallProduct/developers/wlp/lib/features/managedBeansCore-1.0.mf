@@ -1,0 +1,21 @@
+Subsystem-ManifestVersion: 1
+Subsystem-SymbolicName: com.ibm.websphere.appserver.managedBeansCore-1.0
+Subsystem-Version: 1.0.0
+Subsystem-Content: com.ibm.ws.ejbcontainer; version="[1,1.0.100)",
+ com.ibm.ws.activity; version="[1,1.0.100)",
+ com.ibm.ws.javaee.dd.ejb; version="[1,1.0.100)"; location:="dev/api/spec/,lib/",
+ com.ibm.ws.javaee.ejb.3.1; version="[1,1.0.100)"; location:="dev/api/spec/,lib/",
+ com.ibm.ws.javaee.interceptor.1.1; version="[1,1.0.100)"; location:="dev/api/spec/,lib/",
+ com.ibm.ws.jaxrpc.stub; version="[1.1,1.1.100)",
+ com.ibm.ws.managedobject; version="[1.0,1.0.100)",
+ com.ibm.websphere.appserver.anno-1.0; type="osgi.subsystem.feature",
+ com.ibm.websphere.appserver.classloading-1.0; type="osgi.subsystem.feature",
+ com.ibm.websphere.appserver.injection-1.0; type="osgi.subsystem.feature",
+ com.ibm.websphere.appserver.jndi-1.0; type="osgi.subsystem.feature",
+ com.ibm.websphere.appserver.transaction-1.1; type="osgi.subsystem.feature",
+ com.ibm.websphere.appserver.containerServices-1.0; type="osgi.subsystem.feature"
+IBM-Feature-Version: 2
+IBM-API-Package: com.ibm.ejs.container; type="internal",
+ javax.interceptor; type="spec"
+Subsystem-Type: osgi.subsystem.feature
+IBM-ProductID: com.ibm.websphere.appserver

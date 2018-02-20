@@ -1,0 +1,14 @@
+Subsystem-ManifestVersion: 1
+IBM-ShortName: osgiConsole-1.0
+Subsystem-SymbolicName: com.ibm.websphere.appserver.osgiConsole-1.0; visibility:=public
+Subsystem-Version: 1.0.0
+Subsystem-Content: com.ibm.ws.org.apache.felix.gogo.command.0.10.0; location:="lib/com.ibm.ws.org.apache.felix.gogo.command.0.10.0_1.0.0.jar"; start-phase:=SERVICE_EARLY,
+ com.ibm.ws.org.apache.felix.gogo.runtime.0.10.0; location:="lib/com.ibm.ws.org.apache.felix.gogo.runtime.0.10.0_1.0.0.jar"; start-phase:=SERVICE_EARLY, 
+ com.ibm.ws.org.apache.felix.gogo.shell.0.10.0; location:="lib/com.ibm.ws.org.apache.felix.gogo.shell.0.10.0_1.0.0.jar"; start-phase:=SERVICE_EARLY,
+ com.ibm.ws.org.eclipse.equinox.console.1.1.0;  location:="lib/com.ibm.ws.org.eclipse.equinox.console.1.1.0_1.0.0.jar"; start-phase:=SERVICE_EARLY
+Subsystem-Type: osgi.subsystem.feature
+IBM-Feature-Version: 2
+Subsystem-Name: %name
+Subsystem-Description: %description
+Subsystem-Localization: OSGI-INF/l10n/subsystem
+IBM-ProductID: com.ibm.websphere.appserver

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<fix id="8550-wlp-archive-IFPM0002" version="8.5.5000.02050824_1140">
+    <applicability>
+        <offering id="com.ibm.websphere.liberty.BASE.v85" tolerance="[8.5.5000,8.5.5001)"/>
+        <offering id="com.ibm.websphere.liberty.BASETRIAL.v85" tolerance="[8.5.5000,8.5.5001)"/>
+        <offering id="com.ibm.websphere.liberty.EXPRESS.v85" tolerance="[8.5.5000,8.5.5001)"/>
+        <offering id="com.ibm.websphere.liberty.WEBENAB.v85" tolerance="[8.5.5000,8.5.5001)"/>
+        <offering id="com.ibm.websphere.liberty.ND.v85" tolerance="[8.5.5000,8.5.5001)"/>
+        <offering id="com.ibm.websphere.liberty.NDTRIAL.v85" tolerance="[8.5.5000,8.5.5001)"/>
+        <offering id="com.ibm.websphere.liberty.zOS.v85" tolerance="[8.5.5000,8.5.5001)"/>
+        <offering id="com.ibm.websphere.liberty.DEVELOPERS.v85" tolerance="[8.5.5000,8.5.5001)"/>
+        <offering id="com.ibm.websphere.liberty.DEVELOPERSILAN.v85" tolerance="[8.5.5000,8.5.5001)"/>
+        <offering id="com.ibm.websphere.liberty.v85" tolerance="[8.5.5000,8.5.5001)"/>
+        <offering id="com.ibm.websphere.liberty.TRIAL.v85" tolerance="[8.5.5000,8.5.5001)"/>
+    </applicability>
+    <categories/>
+    <information name="8550-wlp-archive-IFPM0002" version="8.5.5000.02050824_1140">RUNNING &quot;PRODUCTINFO VALIDATE&quot; AFTER INSTALLING FIXES RESULTS IN ERRORS</information>
+    <property name="com.ibm.ws.superseded.apars" value=""/>
+    <property name="recommended" value="false"/>
+    <resolves problemCount="3" description="This fix resolves APARS:" showList="true">
+        <problem id="com.ibm.ws.apar.PM0002" displayId="PM0002" description="PM0002"/>
+		<problem id="com.ibm.ws.apar.PM0001" displayId="PM0001" description="PM0001"/>
+    </resolves>
+    <updates>
+        <file date="2013-08-16 11:40" hash="81e421ed8dc5cad4d200a0703070fad2" size="152135" id="BundleA_1.2_20130816"/>
+        <file date="0205-08-24 11:40" hash="f4747f50a89b65834ad03ef69ee7aa65" size="493186" id="BundleA_1.1_20130818"/>
+        <file date="0205-08-24 11:40" hash="4d830f3ea643a3fce2e6d42c8646c51a" size="881" id="scriptB"/>
+    </updates>
+</fix>
