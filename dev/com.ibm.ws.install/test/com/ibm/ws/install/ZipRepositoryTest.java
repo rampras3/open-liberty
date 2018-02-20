@@ -39,7 +39,7 @@ public class ZipRepositoryTest {
     @Test
     public void testValidIndexFile() {
         try {
-            File indexFile = new File("testData/zips/com.ibm.websphere.liberty.repo.core.manifest_8.5.5005.zip");
+            File indexFile = new File("build/unittest/zips/com.ibm.websphere.liberty.repo.core.manifest_8.5.5005.zip");
             ZipRepository zipRepo = (ZipRepository) RepositoryFactory.getInstance(new ZipFile(indexFile));
             Collection<FeatureAsset> fas = zipRepo.getFeatures("com.ibm.websphere.appserver", "8.5.5.5", "InstallationManager", "ILAN", "ND");
             assertNotNull("getFeatures() should not return null", fas);
@@ -52,7 +52,7 @@ public class ZipRepositoryTest {
     @Test
     public void testInvalidIndexFile() {
         try {
-            File zip = new File("testData/zips/invalid.zip");
+            File zip = new File("build/unittest/zips/invalid.zip");
             RepositoryFactory.getInstance(new ZipFile(zip));
         } catch (RepositoryException e) {
             assertTrue("RepositoryFactory.getInstance() should throw exception CWWKF1502E.", e.getMessage().contains("CWWKF1502E"));

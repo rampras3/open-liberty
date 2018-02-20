@@ -27,7 +27,7 @@ import com.ibm.ws.install.internal.InstallKernelImpl;
 public class UninstallKernelTest {
 
     private static File getInstallDir(String testName) throws Exception {
-        File installDir = new File("testData/wlpDirs/" + testName + "/developers/wlp").getAbsoluteFile();
+        File installDir = new File("build/unittest/wlpDirs/" + testName + "/developers/wlp").getAbsoluteFile();
         System.out.println("getInstallDir() installDir set to " + installDir);
         if (installDir == null || !installDir.exists())
             throw new IllegalArgumentException("Test requires an existing root directory, but it could not be found: " + installDir.getAbsolutePath());

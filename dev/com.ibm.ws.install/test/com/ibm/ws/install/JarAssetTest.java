@@ -25,7 +25,7 @@ public class JarAssetTest {
     public void testSampleAsset() throws MalformedURLException, IOException {
         final String m = "testSampleAsset";
         File srcFile = new File("../com.ibm.ws.install_test/publish/massiveRepo/samples/SampleX.jar");
-        File jarFile = new File("testData/tmp/SampleX.jar");
+        File jarFile = new File("build/unittest/tmp/SampleX.jar");
         new InputStreamFileWriter(srcFile.getCanonicalFile().toURI().toURL().openConnection().getInputStream()).writeToFile(jarFile);
         try {
             SampleAsset sampleAsset = new SampleAsset("SampleX", "SampleX", jarFile, true);
@@ -60,7 +60,7 @@ public class JarAssetTest {
     public void testOpenSourceAsset() throws MalformedURLException, IOException {
         final String m = "testOpenSourceAsset";
         File srcFile = new File("../com.ibm.ws.install_test/publish/massiveRepo/samples/SampleX.jar");
-        File jarFile = new File("testData/tmp/SampleX.jar");
+        File jarFile = new File("build/unittest/tmp/SampleX.jar");
         new InputStreamFileWriter(srcFile.getCanonicalFile().toURI().toURL().openConnection().getInputStream()).writeToFile(jarFile);
         try {
             OpenSourceAsset openSourceAsset = new OpenSourceAsset("SampleX", "SampleX", jarFile, true);

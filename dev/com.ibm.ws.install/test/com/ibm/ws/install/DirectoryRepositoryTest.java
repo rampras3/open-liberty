@@ -31,7 +31,7 @@ public class DirectoryRepositoryTest {
     @Test
     public void testFile() {
         try {
-            RepositoryFactory.getInstance(new File("testData/wlpDirs/developers/wlp/lib/versions/WebSphereApplicationServer.properties"));
+            RepositoryFactory.getInstance(new File("build/unittest/wlpDirs/developers/wlp/lib/versions/WebSphereApplicationServer.properties"));
             fail("RepositoryFactory.getInstance() didn't throw exception CWWKF1501E.");
         } catch (RepositoryException e) {
             assertTrue("RepositoryFactory.getInstance() should throw exception CWWKF1501E.", e.getMessage().contains("CWWKF1501E"));

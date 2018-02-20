@@ -45,12 +45,12 @@ public class DirectorTest {
      */
     @BeforeClass
     public static void setUpBeforeClass() throws Exception {
-        imageDir = new File("testData/wlpDirs/developers/wlp").getAbsoluteFile();
+        imageDir = new File("build/unittest/wlpDirs/developers/wlp").getAbsoluteFile();
         System.out.println("setUpBeforeClass() imageDir set to " + imageDir);
         if (imageDir == null || !imageDir.exists())
             throw new IllegalArgumentException("Test requires an existing root directory, but it could not be found: " + imageDir.getAbsolutePath());
 
-        tempDir = new File("testData/tmp");
+        tempDir = new File("build/unittest/tmp");
         if (tempDir == null || !tempDir.exists())
             throw new IllegalArgumentException("Test requires an existing temp directory, but it could not be found: " + tempDir.getAbsolutePath());
 

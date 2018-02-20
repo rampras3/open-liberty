@@ -8,7 +8,7 @@ Bundle-Description: WebSphere Liberty Install Kernel, version ${bVersion}
 Export-Package: \
 	com.ibm.ws.install;provide:=true
 
-Import-Package: !*.internal.*, !com.ibm.ws.kernel.boot.cmdline, *
+Import-Package: !*.internal.*, !com.ibm.ws.kernel.boot.cmdline,*
 
 Private-Package: \
 	com.ibm.ws.install.*
@@ -16,7 +16,6 @@ Private-Package: \
 instrument.disabled: true
 
 -buildpath: \
-	${javac.bootclasspath.java6}, \
 	com.ibm.ws.crypto.passwordutil;version=latest,\
 	com.ibm.ws.kernel.boot.core;version=latest,\
 	com.ibm.ws.kernel.feature;version=latest,\

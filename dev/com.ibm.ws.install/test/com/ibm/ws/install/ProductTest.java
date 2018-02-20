@@ -53,7 +53,7 @@ public class ProductTest {
      */
     @BeforeClass
     public static void setUpBeforeClass() throws Exception {
-        imageDir = new File("testData/wlpDirs/developers/wlp").getAbsoluteFile();
+        imageDir = new File("build/unittest/wlpDirs/developers/wlp").getAbsoluteFile();
         System.out.println("setUpBeforeClass() imageDir set to " + imageDir);
     }
 

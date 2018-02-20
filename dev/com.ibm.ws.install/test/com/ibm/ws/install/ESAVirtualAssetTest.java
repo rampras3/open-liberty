@@ -39,7 +39,7 @@ public class ESAVirtualAssetTest {
 
     @Test
     public void testESAVirtualAsset() {
-        File indexFile = new File("testData/zips/com.ibm.websphere.liberty.repo.core.manifest_8.5.5005.zip");
+        File indexFile = new File("build/unittest/zips/com.ibm.websphere.liberty.repo.core.manifest_8.5.5005.zip");
         try {
             ZipFile zip = new ZipFile(indexFile);
             ESAVirtualAsset esaAsset = new ESAVirtualAsset(zip, "com.ibm.websphere.appserver.adminCenter-1.0/", "usr", false);

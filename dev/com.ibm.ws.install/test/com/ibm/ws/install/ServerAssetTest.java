@@ -39,7 +39,7 @@ public class ServerAssetTest {
      */
     @BeforeClass
     public static void setUpBeforeClass() throws Exception {
-        testDir = new File("testData/serverAssetTest").getAbsoluteFile();
+        testDir = new File("build/unittest/serverAssetTest").getAbsoluteFile();
         testDir.mkdirs();
 
         if (testDir == null || !testDir.isDirectory())

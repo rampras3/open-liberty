@@ -35,7 +35,7 @@ public class CheckFileLockedTest {
 
     @Test
     public void testFixAdaptorPreCheck() throws InstallException {
-        File baseDir = new File("testData/wlpDirs/developers/wlp").getAbsoluteFile();
+        File baseDir = new File("build/unittest/wlpDirs/developers/wlp").getAbsoluteFile();
 
         IFixInfo f = new IFixInfo("testFixAdaptorPreCheck", "1.0.0", Collections.<String> emptySet(),
                         "fix description", new ArrayList<Offering>(0), Collections.<Property> emptyList(),
@@ -54,10 +54,10 @@ public class CheckFileLockedTest {
     @Test
     public void testESAAdaptorPreCheck() throws Exception {
         File srcFile = new File("../com.ibm.ws.install_test/publish/massiveRepo/features/usertest.with.ibm.license.esa");
-        File esaFile = new File("testData/tmp/usertest.with.ibm.license_temp.esa");
+        File esaFile = new File("build/unittest/tmp/usertest.with.ibm.license_temp.esa");
         new InputStreamFileWriter(srcFile.getCanonicalFile().toURI().toURL().openConnection().getInputStream()).writeToFile(esaFile);
         ESAAsset esaAsset = new ESAAsset("usertest.with.ibm.license", "usertest.with.ibm.license", "usr", esaFile, true);
-        File baseDir = new File("testData/wlpDirs/developers/wlp").getAbsoluteFile();
+        File baseDir = new File("build/unittest/wlpDirs/developers/wlp").getAbsoluteFile();
         Product p = new Product(baseDir);
         ESAAdaptor.preCheck(esaAsset.getProvisioningFeatureDefinition(), p.getFeatureDefinitions(), baseDir, false);
     }

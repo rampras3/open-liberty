@@ -67,7 +67,7 @@ public class FixAssetTest {
     public void testFixAsset() throws MalformedURLException, IOException {
         final String m = "testFixAsset";
         File srcFile = new File("../com.ibm.ws.install_test/publish/massiveRepo/fixes/8550-wlp-archive-ifpm89011.jar");
-        File fixFile = new File("testData/tmp/8550-wlp-archive-ifpm89011-temp.jar");
+        File fixFile = new File("build/unittest/tmp/8550-wlp-archive-ifpm89011-temp.jar");
         new InputStreamFileWriter(srcFile.getCanonicalFile().toURI().toURL().openConnection().getInputStream()).writeToFile(fixFile);
         try {
             FixAsset fixAsset = new FixAsset("8550-wlp-archive-ifpm89011", fixFile, true);
