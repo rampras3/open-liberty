@@ -143,8 +143,8 @@ task createGradleBootstrap {
             }
         }
         
-		depsList.add('    compile \'' +org+':featureMavenArtifact:' + getVersionFromReleaseRepo(dev, "featureMavenArtifact") + '@zip\'')
-		depsList.add('    compile \''+org+':json-artifact:' + getVersionFromReleaseRepo(dev, "json-artifact") + '@json\'')
+		depsList.add('    compile \'' +org+':featureMavenArtifact:' + getVersionFromReleaseRepo("dev", "featureMavenArtifact") + '@zip\'')
+		depsList.add('    compile \''+org+':json-artifact:' + getVersionFromReleaseRepo("dev", "json-artifact") + '@json\'')
 		
         File dependenciesFile = new File(project.buildDir, 'dependencies.gradle')
         dependenciesFile.createNewFile()
