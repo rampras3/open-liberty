@@ -38,7 +38,6 @@ dependencies {
     binaries "commons-lang:commons-lang:2.4"
     binaries "org.apache.ant:ant:1.9.6"
     binaries "org.apache.maven:maven-model:3.5.0"
-    
 }
 
 task copyMavenLibs(type: Copy) {
@@ -143,7 +142,10 @@ task createGradleBootstrap {
                 }
             }
         }
-
+        
+		depsList.add('    compile \'' +org+':featureMavenArtifact:' + getVersionFromReleaseRepo(dev, "featureMavenArtifact") + '@zip\'')
+		depsList.add('    compile \''+org+':json-artifact:' + getVersionFromReleaseRepo(dev, "json-artifact") + '@json\'')
+		
         File dependenciesFile = new File(project.buildDir, 'dependencies.gradle')
         dependenciesFile.createNewFile()
         dependenciesFile.text = """dependencies {

@@ -153,11 +153,11 @@ task zipOpenLibertyKernel(type: Zip) {
 }
 publish.dependsOn zipOpenLibertyKernel
 
-// Includes only kind=ga features.
 /*
 task zipMavenArtifact(type: Zip) {
     dependsOn ':com.ibm.websphere.appserver.features:generateMavenArtifact'
-    from project(':com.ibm.websphere.appserver.features').buildDir
+    baseName 'openliberty-mavenArtifact'
+    from parent.project(':com.ibm.websphere.appserver.features').file("build/temp/mavenArtifact")
     destinationDir distsDir
     version releaseVersion
 }

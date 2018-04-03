@@ -15,6 +15,22 @@
   //    rootProject.project(it).tasks.getByName 'prereqFeatureResources'
   //  }
   //}
+repositories{
+	mavenCentral()
+	//maven{url "https://mvnrepository.com/artifact/org.glassfish/javax.json/1.1.2"
+	//	url "https://mvnrepository.com/artifact/org.codehaus.plexus/plexus-utils/3.1.0" }
+}
+dependencies{
+	compile 'org.glassfish:javax.json:1.1.2@jar'
+	compile 'org.codehaus.plexus:plexus-utils:3.1.0@jar'
+}
+
+task copyjar(type: Copy) {
+    from configurations.runtime
+    into project.file('new')
+    include "javax.json*.jar"
+    include "plexus-utils*.jar"
+}
 
 def featurePropertiesMap
 def gaFeatures
@@ -264,6 +280,7 @@ task generateSingleJsonRepo {
 
 task generateMavenArtifact {
     dependsOn generateSingleJsonRepo
+    dependsOn copyjar
 
     doLast{
         ant.taskdef(name:'featuresToMavenRepo', classname:'com.ibm.ws.wlp.mavenFeatures.LibertyFeaturesToMavenRepo') {
@@ -274,8 +291,11 @@ task generateMavenArtifact {
                 fileset(dir: project(':com.ibm.ws.kernel.feature.core').buildDir) {
                     include(name: 'com.ibm.ws.kernel.feature.core.jar')
                 }
-                fileset(dir:project(':com.ibm.ws.org.glassfish.json').buildDir){
-                    include (name:'com.ibm.ws.org.glassfish.json.1.0.jar')
+                fileset(dir:project.file('new')){
+                    include (name:'javax.json-1.1.2.jar')
+                }
+                fileset(dir:project.file('new')){
+                    include (name:'plexus-utils-*.jar')
                 }
                
                 fileset(dir:cnf.file('mavenlibs')) {
@@ -284,8 +304,8 @@ task generateMavenArtifact {
                     include(name: "commons-lang-*.jar")
                     include(name: "javax.json-*.jar")
                     include(name: "maven-model-*.jar")
-                    include(name: "plexus-utils-*.jar")
                 }
+               
             }
         }
 
@@ -293,11 +313,19 @@ task generateMavenArtifact {
         project.mkdir('build/temp/mavenArtifact')
         ant.featuresToMavenRepo(inputDirPath: project.file('build/libs/repo'),
                    outputDirPath: project.file('build/temp/mavenArtifact'),
-                   openLibertyJson: project.file('build/temp/SingleJson.json'))
+                   openLibertyJson:file('build/temp/SingleJson.json'))
     }
 }
 
-publish.dependsOn generateMavenArtifact
+task zipMavenArtifact(type: Zip) {
+    dependsOn generateMavenArtifact
+    baseName 'openliberty-mavenArtifact'
+    from project.file("build/temp/mavenArtifact")
+    destinationDir project.file("build/temp")
+    version project.version
+}
+publish.dependsOn zipMavenArtifact
+//publish.dependsOn generateMavenArtifact
 
 
 def featuresToPublish() {
@@ -322,12 +350,21 @@ publishing {
         artifact source: new File(project.buildDir, 'repo/' + feature + ".esa.metadata.zip"), extension: 'esa.metadata.zip'
       }
     }
-     /* 
-    if(file("$rootProject.testReportDir").exists()){
-				testReport(MavenPublication){
-					artifact zipTestReport
-					artifactId "testReport-${packageName}"
-				}
-			}*/
+     
+    if(project.file("build/temp/openliberty-mavenArtifact.zip").exists()){
+		newMavenArtifact(MavenPublication) {
+			artifactId "featureMavenArtifact"
+			version project.version
+			artifact project.file("build/temp/openliberty-mavenArtifact.zip")
+					
+			}
+	}
+	if(project.file("build/temp/SingleJson.json").exists()){
+		newJsonArtifact(MavenPublication) {
+      artifactId 'json-artifact'
+      version project.version
+      artifact project.file("build/temp/SingleJson.json")
+      }
+  }
   }
 }
