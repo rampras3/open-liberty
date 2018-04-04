@@ -154,20 +154,6 @@ task zipOpenLibertyKernel(type: Zip) {
 publish.dependsOn zipOpenLibertyKernel
 
 /*
-task zipMavenArtifact(type: Zip) {
-  //  dependsOn ':com.ibm.websphere.appserver.features:generateMavenArtifact'
-    dependsOn parent.subprojects.assemble
-   // baseName 'openliberty-mavenArtifact'
-    //from parent.project(':com.ibm.websphere.appserver.features').file("build/temp/mavenArtifact")
-    from '${rootDir}/com.ibm.websphere.appserver.features/build/temp/'  
-    include "mavenArtifact/**"
-    archiveName 'openliberty-mavenArtifact.zip'
- 
-    destinationDir distsDir
-}
-zipMavenArtifact.dependsOn ':com.ibm.websphere.appserver.features:generateMavenArtifact'
-publish.dependsOn zipMavenArtifact
-*/
 
 task zipOpenLibertyMavenRepo(type: Zip){
 	dependsOn parent.subprojects.assemble
@@ -185,7 +171,7 @@ task zipOpenLibertyMavenRepo(type: Zip){
 
 zipOpenLibertyMavenRepo.dependsOn  ':com.ibm.websphere.appserver.features:generateMavenArtifact'
 publish.dependsOn zipOpenLibertyMavenRepo
-
+*/
 // Includes all features.
 task zipOpenLibertyAll(type: Zip) {
     dependsOn parent.subprojects.assemble
@@ -214,14 +200,14 @@ publishing {
             version project.version
             artifact zipOpenLibertyAll
         }
-       // if(project.file("build/temp/openliberty-mavenArtifact.zip").exists()){
+        if(project.file("build/temp/openliberty-mavenArtifact.zip").exists()){
 		newMavenArtifact(MavenPublication) {
 			artifactId "featureMavenArtifact"
 			version project.version
 			artifact zipOpenLibertyMavenRepo
 					
 			}
-		//}
+		}
     }
 }
 
