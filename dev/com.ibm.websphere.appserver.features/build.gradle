@@ -319,13 +319,17 @@ task generateMavenArtifact {
 
 task zipMavenArtifact(type: Zip) {
     dependsOn generateMavenArtifact
-    baseName 'openliberty-mavenArtifact'
     from project.file("build/temp/mavenArtifact")
+    include '*'
+   	include '*/*'
     destinationDir project.file("build/temp")
-    version project.version
+    archiveName 'openliberty-mavenArtifact.zip'   
+    
 }
+publish.dependsOn generateMavenArtifact
 publish.dependsOn zipMavenArtifact
-//publish.dependsOn generateMavenArtifact
+
+zipMavenArtifact.mustRunAfter generateMavenArtifact
 
 
 def featuresToPublish() {
@@ -359,12 +363,12 @@ publishing {
 					
 			}
 	}
-	if(project.file("build/temp/SingleJson.json").exists()){
+//	if(project.file("build/temp/SingleJson.json").exists()){
 		newJsonArtifact(MavenPublication) {
       artifactId 'json-artifact'
       version project.version
       artifact project.file("build/temp/SingleJson.json")
       }
-  }
+//  }
   }
 }
