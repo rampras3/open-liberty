@@ -17,8 +17,6 @@
   //}
 repositories{
 	mavenCentral()
-	//maven{url "https://mvnrepository.com/artifact/org.glassfish/javax.json/1.1.2"
-	//	url "https://mvnrepository.com/artifact/org.codehaus.plexus/plexus-utils/3.1.0" }
 }
 dependencies{
 	compile 'org.glassfish:javax.json:1.1.2@jar'
@@ -27,7 +25,7 @@ dependencies{
 
 task copyjar(type: Copy) {
     from configurations.runtime
-    into project.file('new')
+    into project.file('mavenlibs')
     include "javax.json*.jar"
     include "plexus-utils*.jar"
 }
@@ -263,7 +261,6 @@ task generateSingleJsonRepo {
                     include(name: "org.apache.aries.util-*.jar")
                     include(name: "jsoup-*.jar")
                     include(name: "osgi.core*.jar")
-                    include(name: "plexus-utils-*.jar")
                 }
             }
         }
@@ -291,13 +288,11 @@ task generateMavenArtifact {
                 fileset(dir: project(':com.ibm.ws.kernel.feature.core').buildDir) {
                     include(name: 'com.ibm.ws.kernel.feature.core.jar')
                 }
-                fileset(dir:project.file('new')){
-                    include (name:'javax.json-1.1.2.jar')
-                }
-                fileset(dir:project.file('new')){
+                fileset(dir:project.file('mavenlibs')){
+                    include (name:'javax.json-*.jar')
                     include (name:'plexus-utils-*.jar')
                 }
-               
+                             
                 fileset(dir:cnf.file('mavenlibs')) {
                     include(name: "ant-*.jar")
                     include(name: "commons-io-*.jar")
@@ -319,25 +314,16 @@ task generateMavenArtifact {
 
 task zipOpenLibertyMavenRepo(type: Zip){
 	dependsOn parent.subprojects.assemble
-	//dependsOn 'cnf:generateMavenArtifact'
-		
-	//	basename 'openliberty-mavenArtifact'
 		from "${rootDir}/com.ibm.websphere.appserver.features/build/temp/"
 		include "mavenArtifact/**"
-		archiveName 'openliberty-mavenArtifact.zip'
-		
+		archiveName 'openliberty-mavenArtifact.zip'		
     	destinationDir distsDir
 
 }
-   // zipOpenLibertyMavenRepo.dependsOn project("${rootDir}/cnf").tasks.generateMavenArtifact
 
-zipOpenLibertyMavenRepo.dependsOn generateMavenArtifact
 publish.dependsOn zipOpenLibertyMavenRepo
-
 publish.dependsOn generateMavenArtifact
-//publish.dependsOn zipMavenArtifact
-
-//zipMavenArtifact.mustRunAfter generateMavenArtifact
+zipOpenLibertyMavenRepo.mustRunAfter generateMavenArtifact
 
 
 def featuresToPublish() {
@@ -361,22 +347,18 @@ publishing {
         artifact source: new File(project.buildDir, 'repo/' + feature + ".esa"), extension: 'esa'
         artifact source: new File(project.buildDir, 'repo/' + feature + ".esa.metadata.zip"), extension: 'esa.metadata.zip'
       }
-    }
-     
-    //if(project.file("build/temp/openliberty-mavenArtifact.zip").exists()){
-		newMavenArtifact(MavenPublication) {
-			artifactId "featureMavenArtifact"
-			version project.version
-			artifact zipOpenLibertyMavenRepo
-					
-			}
-	//}
-//	if(project.file("build/temp/SingleJson.json").exists()){
-		newJsonArtifact(MavenPublication) {
-      artifactId 'json-artifact'
+    }   
+	newMavenArtifact(MavenPublication) {
+	  artifactId "openliberty-MavenArtifact"
+	  version project.version
+	  artifact zipOpenLibertyMavenRepo					
+	}
+
+	newJsonArtifact(MavenPublication) {
+      artifactId 'openliberty-singleJson'
       version project.version
       artifact project.file("build/temp/SingleJson.json")
-      }
-//  }
+    }
+  	
   }
 }

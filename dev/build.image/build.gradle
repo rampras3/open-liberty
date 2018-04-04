@@ -153,25 +153,6 @@ task zipOpenLibertyKernel(type: Zip) {
 }
 publish.dependsOn zipOpenLibertyKernel
 
-/*
-
-task zipOpenLibertyMavenRepo(type: Zip){
-	dependsOn parent.subprojects.assemble
-	//dependsOn 'cnf:generateMavenArtifact'
-		
-	//	basename 'openliberty-mavenArtifact'
-		from "${rootDir}/com.ibm.websphere.appserver.features/build/temp/"
-		include "mavenArtifact/**"
-		archiveName 'openliberty-mavenArtifact.zip'
-		
-    	destinationDir distsDir
-
-}
-   // zipOpenLibertyMavenRepo.dependsOn project("${rootDir}/cnf").tasks.generateMavenArtifact
-
-zipOpenLibertyMavenRepo.dependsOn  ':com.ibm.websphere.appserver.features:generateMavenArtifact'
-publish.dependsOn zipOpenLibertyMavenRepo
-*/
 // Includes all features.
 task zipOpenLibertyAll(type: Zip) {
     dependsOn parent.subprojects.assemble
@@ -199,15 +180,7 @@ publishing {
             artifactId 'openliberty'
             version project.version
             artifact zipOpenLibertyAll
-        }
-        if(project.file("build/temp/openliberty-mavenArtifact.zip").exists()){
-		newMavenArtifact(MavenPublication) {
-			artifactId "featureMavenArtifact"
-			version project.version
-			artifact zipOpenLibertyMavenRepo
-					
-			}
-		}
+        }  
     }
 }
 
