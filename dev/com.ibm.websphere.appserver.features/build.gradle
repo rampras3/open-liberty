@@ -269,8 +269,6 @@ task generateSingleJsonRepo {
                 jsonFile: singleOpenLibertyJsonRepo)
             
         }
-       // File gaEsa = new File(project.buildDir, 'gaFeaturesList.txt')
-      //  gaEsa.createNewFile()
         modifiedgaFeatureList.text = features
     }
 }
