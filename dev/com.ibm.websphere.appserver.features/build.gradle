@@ -260,7 +260,7 @@ task generateSingleJsonRepo {
 
         repositoryGeneratorTaskdef(ant)
 		
-		String features = ""     
+	String features = ""     
         getGaFeatures().each { gaFeature ->
         	features += gaFeature + "*.esa\n"
             ant.singleJsonRepo(assetFile: project.file("build/libs/repo/${gaFeature}.esa"),
