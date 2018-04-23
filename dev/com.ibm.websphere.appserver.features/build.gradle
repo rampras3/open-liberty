@@ -252,7 +252,6 @@ task generateSingleJsonRepo {
     dependsOn publishFeatureResources
     inputs.dir new File(project.buildDir, 'repo')
     outputs.file singleOpenLibertyJsonRepo
-    outputs.file modifiedgaFeatureList
     doLast {
         project.delete('build/temp')
         project.mkdir('build/temp')
