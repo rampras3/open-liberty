@@ -44,6 +44,7 @@ import javax.xml.parsers.DocumentBuilderFactory;
 
 import org.apache.commons.io.IOUtils;
 import org.apache.maven.model.Dependency;
+import org.apache.maven.model.DependencyManagement;
 import org.apache.maven.model.Model;
 import org.apache.maven.model.License;
 import org.apache.maven.model.io.xpp3.MavenXpp3Writer;
@@ -170,21 +171,31 @@ public class LibertyFeaturesToMavenRepo extends Task {
 					}
 				}
 			}
-
-			// Copy JSON artifacts and generate POMs for either Open or WebSphere Liberty
+			
+		
+			// Copy JSON artifacts and generate POMs for either Open or WebSphere Liberty	
+			//generate Bill of Materials for either Open or WebSphere Liberty
 			if (websphereLibertyJson == null) {
 				copyJsonArtifact(modifiedOpenLibertyJsonFile, outputDir, version, false);
 				generateJsonPom(outputDir, version, false);
+				generateBOM(false,version,outputDir,allFeatures,Constants.ArtifactType.ESA);
+
 			} else {
 				copyJsonArtifact(modifiedWebsphereLibertyJsonFile, outputDir, version, true);
 				generateJsonPom(outputDir, version, true);
+				generateBOM(true,version,outputDir,allFeatures,Constants.ArtifactType.ESA);
+
 			}
-			
+						
+
 			System.out.println("Successfully generated Maven artifacts from Liberty features.");
 		} catch (MavenRepoGeneratorException e) {
 			System.out.println("Failed to generate Maven artifacts from Liberty features. Exception: " + e.getMessage());
 			e.printStackTrace();
 			System.exit(1);
+		} catch (IOException e) {
+			System.out.println("Failed to generate BOM from Liberty features. Exception: " + e.getMessage());
+			e.printStackTrace();
 		}
 
 	}
@@ -284,6 +295,46 @@ public class LibertyFeaturesToMavenRepo extends Task {
 		} catch (IOException e) {
 			throw new MavenRepoGeneratorException("Could not write POM file " + targetFile, e);
 		}
+		
+	}
+	
+	private static void generateBOM(boolean isWebsphereLiberty, String version,File outputDir, Map<String, LibertyFeature> allFeatures,Constants.ArtifactType type) throws MavenRepoGeneratorException, IOException {
+		
+		String groupId = isWebsphereLiberty ? Constants.WEBSPHERE_LIBERTY_FEATURES_GROUP_ID : Constants.OPEN_LIBERTY_FEATURES_GROUP_ID;
+		MavenCoordinates coordinates = new MavenCoordinates(groupId, Constants.BOM_ARTIFACT_ID, version);		
+		Model model = new Model();
+		model.setModelVersion(Constants.MAVEN_MODEL_VERSION);
+		model.setGroupId(coordinates.getGroupId());
+		model.setArtifactId(coordinates.getArtifactId());
+		model.setVersion(coordinates.getVersion());
+		
+		List<Dependency> dependencies = new ArrayList<Dependency>();
+		DependencyManagement dependencyManagement = new DependencyManagement();		
+		model.setDependencyManagement(dependencyManagement);
+		dependencyManagement.setDependencies(dependencies);
+		for (LibertyFeature feature : allFeatures.values()) {
+			MavenCoordinates requiredArtifact = feature.getMavenCoordinates();
+			addDependency(dependencies, requiredArtifact,type);	
+			
+		}
+		
+		File artifactDir = new File(outputDir, Utils.getRepositorySubpath(coordinates));
+		artifactDir.mkdirs();	
+		File targetFile = new File(artifactDir, Utils.getFileName(coordinates, Constants.ArtifactType.POM));
+
+		if(!targetFile.exists()){
+			targetFile.createNewFile();
+		}
+			
+		try {
+			Writer writer = new FileWriter(targetFile);
+			new MavenXpp3Writer().write( writer, model );
+			
+			writer.close();
+		} catch (IOException e) {
+			throw new MavenRepoGeneratorException("Could not write POM file " + targetFile, e);
+		}
+		
 		
 	}
 	
