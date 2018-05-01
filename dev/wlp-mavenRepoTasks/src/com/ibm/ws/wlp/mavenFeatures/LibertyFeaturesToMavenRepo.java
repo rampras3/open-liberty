@@ -307,6 +307,7 @@ public class LibertyFeaturesToMavenRepo extends Task {
 		model.setGroupId(coordinates.getGroupId());
 		model.setArtifactId(coordinates.getArtifactId());
 		model.setVersion(coordinates.getVersion());
+		model.setPackaging(Constants.ArtifactType.POM.getType());
 		
 		List<Dependency> dependencies = new ArrayList<Dependency>();
 		DependencyManagement dependencyManagement = new DependencyManagement();		
