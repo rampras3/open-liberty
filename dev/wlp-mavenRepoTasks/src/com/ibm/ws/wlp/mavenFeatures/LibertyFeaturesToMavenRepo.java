@@ -308,15 +308,27 @@ public class LibertyFeaturesToMavenRepo extends Task {
 		model.setArtifactId(coordinates.getArtifactId());
 		model.setVersion(coordinates.getVersion());
 		model.setPackaging(Constants.ArtifactType.POM.getType());
+		setLicense(model,version, false, false,isWebsphereLiberty);
 		
 		List<Dependency> dependencies = new ArrayList<Dependency>();
+		model.setDependencies(dependencies);
+		
+		List<Dependency> featureDependencies = new ArrayList<Dependency>();
 		DependencyManagement dependencyManagement = new DependencyManagement();		
 		model.setDependencyManagement(dependencyManagement);
-		dependencyManagement.setDependencies(dependencies);
+		dependencyManagement.setDependencies(featureDependencies);
+		
 		for (LibertyFeature feature : allFeatures.values()) {
 			MavenCoordinates requiredArtifact = feature.getMavenCoordinates();
-			addDependency(dependencies, requiredArtifact,type);	
+			if(requiredArtifact.getGroupId()==coordinates.getGroupId()){			
+				addDependency(featureDependencies, requiredArtifact,type);	
+			}
 			
+		}				
+		
+		if(isWebsphereLiberty){
+			MavenCoordinates OpenLibertycoordinates = new MavenCoordinates(Constants.OPEN_LIBERTY_FEATURES_GROUP_ID, Constants.BOM_ARTIFACT_ID, version);				
+			addDependency(dependencies,OpenLibertycoordinates, Constants.ArtifactType.POM);		
 		}
 		
 		File artifactDir = new File(outputDir, Utils.getRepositorySubpath(coordinates));
