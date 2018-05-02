@@ -267,7 +267,7 @@ public class LibertyFeaturesToMavenRepo extends Task {
 		if (!requiredFeatures.isEmpty()) {
 			for (LibertyFeature requiredFeature : requiredFeatures) {
 				MavenCoordinates requiredArtifact = requiredFeature.getMavenCoordinates();
-				addDependency(dependencies, requiredArtifact, type);
+				addDependency(dependencies, requiredArtifact, type,null);
 			}
 		}
 		
@@ -275,13 +275,13 @@ public class LibertyFeaturesToMavenRepo extends Task {
 		if (additionalDependencies != null && additionalDependencies.containsKey(feature.getSymbolicName())) {
 			List<MavenCoordinates> artifacts = additionalDependencies.get(feature.getSymbolicName());
 			for (MavenCoordinates requiredArtifact : artifacts) {
-				addDependency(dependencies, requiredArtifact, null);
+				addDependency(dependencies, requiredArtifact, null,null);
 			}
 		}
 		
 		if (featureCompileDependencies != null) {
 			for (MavenCoordinates requiredArtifact : featureCompileDependencies) {
-				addDependency(dependencies, requiredArtifact, null);
+				addDependency(dependencies, requiredArtifact, null,null);
 			}
 		}
 		
@@ -309,26 +309,23 @@ public class LibertyFeaturesToMavenRepo extends Task {
 		model.setVersion(coordinates.getVersion());
 		model.setPackaging(Constants.ArtifactType.POM.getType());
 		setLicense(model,version, false, false,isWebsphereLiberty);
-		
+
 		List<Dependency> dependencies = new ArrayList<Dependency>();
-		model.setDependencies(dependencies);
-		
-		List<Dependency> featureDependencies = new ArrayList<Dependency>();
 		DependencyManagement dependencyManagement = new DependencyManagement();		
 		model.setDependencyManagement(dependencyManagement);
-		dependencyManagement.setDependencies(featureDependencies);
+		dependencyManagement.setDependencies(dependencies);
 		
 		for (LibertyFeature feature : allFeatures.values()) {
 			MavenCoordinates requiredArtifact = feature.getMavenCoordinates();
 			if(requiredArtifact.getGroupId()==coordinates.getGroupId()){			
-				addDependency(featureDependencies, requiredArtifact,type);	
+				addDependency(dependencies, requiredArtifact,type,null);	
 			}
 			
 		}				
 		
 		if(isWebsphereLiberty){
 			MavenCoordinates OpenLibertycoordinates = new MavenCoordinates(Constants.OPEN_LIBERTY_FEATURES_GROUP_ID, Constants.BOM_ARTIFACT_ID, version);				
-			addDependency(dependencies,OpenLibertycoordinates, Constants.ArtifactType.POM);		
+			addDependency(dependencies,OpenLibertycoordinates, Constants.ArtifactType.POM,"import");		
 		}
 		
 		File artifactDir = new File(outputDir, Utils.getRepositorySubpath(coordinates));
@@ -368,7 +365,8 @@ public class LibertyFeaturesToMavenRepo extends Task {
 		// WL JSON POM depends on OL JSON POM
 		if (isWebsphereLiberty && openLibertyJson != null) {
 			MavenCoordinates openLibertyCoordinates = new MavenCoordinates(Constants.OPEN_LIBERTY_FEATURES_GROUP_ID, Constants.JSON_ARTIFACT_ID, version);
-			addDependency(dependencies, openLibertyCoordinates, Constants.ArtifactType.JSON);
+			String scope="import";
+			addDependency(dependencies, openLibertyCoordinates, Constants.ArtifactType.JSON,scope);
 		}
 				
 		File artifactDir = new File(outputDir, Utils.getRepositorySubpath(coordinates));
@@ -410,11 +408,15 @@ public class LibertyFeaturesToMavenRepo extends Task {
 	 * @param requiredArtifact The required artifact to add as a dependency.
 	 * @param type The type of artifact, or null if jar.
 	 */
-	private static void addDependency(List<Dependency> dependencies, MavenCoordinates requiredArtifact, Constants.ArtifactType type) {
+	private static void addDependency(List<Dependency> dependencies, MavenCoordinates requiredArtifact, Constants.ArtifactType type, String scope) {
 		Dependency dependency = new Dependency();
 		dependency.setGroupId(requiredArtifact.getGroupId());
 		dependency.setArtifactId(requiredArtifact.getArtifactId());
 		dependency.setVersion(requiredArtifact.getVersion());
+
+		if(scope!=null){
+			dependency.setScope(scope);
+		}
 		if (type != null) {
 			dependency.setType(type.getType());
 		}
