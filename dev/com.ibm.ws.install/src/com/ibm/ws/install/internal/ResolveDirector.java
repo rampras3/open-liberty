@@ -252,7 +252,8 @@ class ResolveDirector extends AbstractDirector {
                         }
                         throw ExceptionUtils.createByKey(e, "ERROR_FAILED_TO_CONNECT");
                     }
-                    throw ExceptionUtils.create(e, featureNames, false, proxy, true);
+                    String edition = product.getProductEdition();
+                    throw ExceptionUtils.create(e, featureNames, edition, false, proxy, true);
                 }
             } else {
                 String decodedPwd = rc.getUserPwd();
@@ -299,7 +300,8 @@ class ResolveDirector extends AbstractDirector {
                     }
                     throw ExceptionUtils.createByKey(e, "ERROR_FAILED_TO_CONNECT");
                 }
-                throw ExceptionUtils.create(e, featureNames, false, proxy, true);
+                String edition = product.getProductEdition();
+                throw ExceptionUtils.create(e, featureNames, edition, false, proxy, true);
             }
             if (userId != null) {
                 restConnection.setUserId(userId);
@@ -431,7 +433,8 @@ class ResolveDirector extends AbstractDirector {
                 installResources = resolver.resolve(featuresToInstall);
             }
         } catch (RepositoryResolutionException e) {
-            throw ExceptionUtils.create(e, featureNamesProcessed, product.getInstallDir(), false);
+            String edition = product.getProductEdition();
+            throw ExceptionUtils.create(e, featureNamesProcessed, edition, product.getInstallDir(), false);
         } catch (RepositoryException e) {
             throw ExceptionUtils.create(e, featureNamesProcessed, false, proxy, defaultRepo());
         }
@@ -604,7 +607,8 @@ class ResolveDirector extends AbstractDirector {
             resolver = new RepositoryResolver(productDefinitions, installedFeatures, installedIFixes, loginInfo);
             installResources = resolver.resolve(assetsToInstall);
         } catch (RepositoryResolutionException e) {
-            throw ExceptionUtils.create(e, assetNamesProcessed, product.getInstallDir(), true);
+            String edition = product.getProductEdition();
+            throw ExceptionUtils.create(e, assetNamesProcessed, edition, product.getInstallDir(), true);
         } catch (RepositoryException e) {
             throw ExceptionUtils.create(e, assetNamesProcessed, true, proxy, defaultRepo());
         }

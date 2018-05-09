@@ -254,7 +254,8 @@ public class ExceptionUtils {
      * @param defaultRepo
      * @return
      */
-    static InstallException create(RepositoryException e, Collection<String> featureNames, boolean installingAsset, RestRepositoryConnectionProxy proxy, boolean defaultRepo) {
+    static InstallException create(RepositoryException e, Collection<String> featureNames, String productEdition, boolean installingAsset, RestRepositoryConnectionProxy proxy,
+                                   boolean defaultRepo) {
         Throwable cause = e;
         Throwable rootCause = e;
 
@@ -272,7 +273,7 @@ public class ExceptionUtils {
 
             String featuresListStr = InstallUtils.getFeatureListOutput(featureNames);
             InstallException ie = create(Messages.INSTALL_KERNEL_MESSAGES.getLogMessage(installingAsset ? "ERROR_FAILED_TO_RESOLVE_ASSETS" : "ERROR_FAILED_TO_RESOLVE_FEATURES",
-                                                                                        featuresListStr),
+                                                                                        featuresListStr, productEdition),
                                          e);
             ie.setData(featuresListStr);
 
