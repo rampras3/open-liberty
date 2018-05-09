@@ -433,10 +433,10 @@ class ResolveDirector extends AbstractDirector {
                 installResources = resolver.resolve(featuresToInstall);
             }
         } catch (RepositoryResolutionException e) {
-            String edition = product.getProductEdition();
+            String edition = this.product.getProductEdition();
             throw ExceptionUtils.create(e, featureNamesProcessed, edition, product.getInstallDir(), false);
         } catch (RepositoryException e) {
-            throw ExceptionUtils.create(e, featureNamesProcessed, false, proxy, defaultRepo());
+            throw ExceptionUtils.create(e, featureNamesProcessed, "", false, proxy, defaultRepo());
         }
         List<List<RepositoryResource>> installResourcesCollection = new ArrayList<List<RepositoryResource>>(installResources.size());
         List<RepositoryResource> installResourcesSingleList = new ArrayList<RepositoryResource>();
@@ -607,10 +607,10 @@ class ResolveDirector extends AbstractDirector {
             resolver = new RepositoryResolver(productDefinitions, installedFeatures, installedIFixes, loginInfo);
             installResources = resolver.resolve(assetsToInstall);
         } catch (RepositoryResolutionException e) {
-            String edition = product.getProductEdition();
+            String edition = this.product.getProductEdition();
             throw ExceptionUtils.create(e, assetNamesProcessed, edition, product.getInstallDir(), true);
         } catch (RepositoryException e) {
-            throw ExceptionUtils.create(e, assetNamesProcessed, true, proxy, defaultRepo());
+            throw ExceptionUtils.create(e, assetNamesProcessed, "", true, proxy, defaultRepo());
         }
 
         List<List<RepositoryResource>> installResourcesCollection = new ArrayList<List<RepositoryResource>>(installResources.size());
