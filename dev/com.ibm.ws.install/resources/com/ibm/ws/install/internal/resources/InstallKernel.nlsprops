@@ -41,7 +41,7 @@ ERROR_UNINSTALL_FIX_INVALID_META_DATA.explanation=Internal error detected proces
 ERROR_UNINSTALL_FIX_INVALID_META_DATA.useraction=See the problem determination information on the WebSphere Application Server Support web page: http://www.ibm.com/software/webservers/appserv/was/support.
 
 # Following messages for InstallException
-ERROR_FAILED_TO_RESOLVE_FEATURES=CWWKF1203E: Unable to obtain the following features: {0}. Ensure that they are valid for edition {1}.
+ERROR_FAILED_TO_RESOLVE_FEATURES=CWWKF1203E: Unable to obtain the following features: {0}. Ensure that the features are valid for {1}.
 ERROR_FAILED_TO_RESOLVE_FEATURES.explanation=The installer could not retrieve the specified features from the IBM WebSphere Liberty Repository.
 ERROR_FAILED_TO_RESOLVE_FEATURES.useraction=If specified features exist, ensure they are valid for the specified edition. 
 
