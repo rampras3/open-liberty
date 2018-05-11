@@ -254,7 +254,8 @@ public class ExceptionUtils {
      * @param defaultRepo
      * @return
      */
-    static InstallException create(RepositoryException e, Collection<String> featureNames, boolean installingAsset, RestRepositoryConnectionProxy proxy, boolean defaultRepo) {
+    static InstallException create(RepositoryException e, Collection<String> featureNames, String productEdition, boolean installingAsset, RestRepositoryConnectionProxy proxy,
+                                   boolean defaultRepo) {
         Throwable cause = e;
         Throwable rootCause = e;
 
@@ -272,7 +273,7 @@ public class ExceptionUtils {
 
             String featuresListStr = InstallUtils.getFeatureListOutput(featureNames);
             InstallException ie = create(Messages.INSTALL_KERNEL_MESSAGES.getLogMessage(installingAsset ? "ERROR_FAILED_TO_RESOLVE_ASSETS" : "ERROR_FAILED_TO_RESOLVE_FEATURES",
-                                                                                        featuresListStr),
+                                                                                        featuresListStr, productEdition),
                                          e);
             ie.setData(featuresListStr);
 
@@ -287,11 +288,12 @@ public class ExceptionUtils {
      *
      * @param e
      * @param assetNames
+     * @param edition
      * @param installDir
      * @param installingAsset
      * @return
      */
-    static InstallException create(RepositoryResolutionException e, Collection<String> assetNames, File installDir, boolean installingAsset) {
+    static InstallException create(RepositoryResolutionException e, Collection<String> assetNames, String edition, File installDir, boolean installingAsset) {
         Collection<MissingRequirement> allRequirementsNotFound = e.getAllRequirementsResourcesNotFound();
         Collection<MissingRequirement> dependants = new ArrayList<MissingRequirement>(allRequirementsNotFound.size());
         for (MissingRequirement f : allRequirementsNotFound) {
@@ -402,7 +404,7 @@ public class ExceptionUtils {
         }
 
         InstallException ie = create(Messages.INSTALL_KERNEL_MESSAGES.getLogMessage(installingAsset ? "ERROR_FAILED_TO_RESOLVE_ASSETS" : "ERROR_FAILED_TO_RESOLVE_FEATURES",
-                                                                                    InstallUtils.getFeatureListOutput(assetNames)),
+                                                                                    InstallUtils.getFeatureListOutput(assetNames), edition),
                                      e);
         ie.setData(assetNames);
 

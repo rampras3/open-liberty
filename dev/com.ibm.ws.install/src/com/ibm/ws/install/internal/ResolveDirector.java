@@ -252,7 +252,13 @@ class ResolveDirector extends AbstractDirector {
                         }
                         throw ExceptionUtils.createByKey(e, "ERROR_FAILED_TO_CONNECT");
                     }
-                    throw ExceptionUtils.create(e, featureNames, false, proxy, true);
+                    String edition = this.product.getProductEdition();
+                    if (edition.contains("Open")) {
+                        edition = "Open Liberty";
+                    } else if (edition != null) {
+                        edition = edition + " edition.";
+                    }
+                    throw ExceptionUtils.create(e, featureNames, edition, false, proxy, true);
                 }
             } else {
                 String decodedPwd = rc.getUserPwd();
@@ -299,7 +305,13 @@ class ResolveDirector extends AbstractDirector {
                     }
                     throw ExceptionUtils.createByKey(e, "ERROR_FAILED_TO_CONNECT");
                 }
-                throw ExceptionUtils.create(e, featureNames, false, proxy, true);
+                String edition = this.product.getProductEdition();
+                if (edition.contains("Open")) {
+                    edition = "Open Liberty";
+                } else if (edition != null) {
+                    edition = edition + " edition.";
+                }
+                throw ExceptionUtils.create(e, featureNames, edition, false, proxy, true);
             }
             if (userId != null) {
                 restConnection.setUserId(userId);
@@ -417,6 +429,12 @@ class ResolveDirector extends AbstractDirector {
 
         RepositoryResolver resolver;
         Collection<List<RepositoryResource>> installResources;
+        String edition = this.product.getProductEdition();
+        if (edition.contains("Open")) {
+            edition = "Open Liberty";
+        } else if (edition != null) {
+            edition = edition + " edition.";
+        }
         try {
             if (downloadOption == DownloadOption.all || downloadOption == DownloadOption.none) {
                 resolver = new RepositoryResolver(productDefinitions, Collections.<ProvisioningFeatureDefinition> emptySet(), Collections.<IFixInfo> emptySet(), loginInfo);
@@ -430,10 +448,12 @@ class ResolveDirector extends AbstractDirector {
                 resolver = new RepositoryResolver(productDefinitions, product.getFeatureDefinitions().values(), FixAdaptor.getInstalledIFixes(product.getInstallDir()), loginInfo);
                 installResources = resolver.resolve(featuresToInstall);
             }
+
         } catch (RepositoryResolutionException e) {
-            throw ExceptionUtils.create(e, featureNamesProcessed, product.getInstallDir(), false);
+
+            throw ExceptionUtils.create(e, featureNamesProcessed, edition, product.getInstallDir(), false);
         } catch (RepositoryException e) {
-            throw ExceptionUtils.create(e, featureNamesProcessed, false, proxy, defaultRepo());
+            throw ExceptionUtils.create(e, featureNamesProcessed, edition, false, proxy, defaultRepo());
         }
         List<List<RepositoryResource>> installResourcesCollection = new ArrayList<List<RepositoryResource>>(installResources.size());
         List<RepositoryResource> installResourcesSingleList = new ArrayList<RepositoryResource>();
@@ -582,9 +602,16 @@ class ResolveDirector extends AbstractDirector {
             assetNamesProcessed.add(s.replaceAll("\\\\+$", ""));
         }
         Collection<ProductDefinition> productDefinitions = new HashSet<ProductDefinition>();
+        String edition = null;
         try {
             for (ProductInfo productInfo : ProductInfo.getAllProductInfo().values()) {
                 productDefinitions.add(new ProductInfoProductDefinition(productInfo));
+                edition = productInfo.getEdition();
+            }
+            if (edition.contains("Open")) {
+                edition = "Open Liberty";
+            } else if (edition != null) {
+                edition = edition + " edition.";
             }
         } catch (Exception e) {
             throw ExceptionUtils.create(e);
@@ -604,9 +631,10 @@ class ResolveDirector extends AbstractDirector {
             resolver = new RepositoryResolver(productDefinitions, installedFeatures, installedIFixes, loginInfo);
             installResources = resolver.resolve(assetsToInstall);
         } catch (RepositoryResolutionException e) {
-            throw ExceptionUtils.create(e, assetNamesProcessed, product.getInstallDir(), true);
+
+            throw ExceptionUtils.create(e, assetNamesProcessed, edition, product.getInstallDir(), true);
         } catch (RepositoryException e) {
-            throw ExceptionUtils.create(e, assetNamesProcessed, true, proxy, defaultRepo());
+            throw ExceptionUtils.create(e, assetNamesProcessed, edition, true, proxy, defaultRepo());
         }
 
         List<List<RepositoryResource>> installResourcesCollection = new ArrayList<List<RepositoryResource>>(installResources.size());
