@@ -41,9 +41,9 @@ ERROR_UNINSTALL_FIX_INVALID_META_DATA.explanation=Internal error detected proces
 ERROR_UNINSTALL_FIX_INVALID_META_DATA.useraction=See the problem determination information on the WebSphere Application Server Support web page: http://www.ibm.com/software/webservers/appserv/was/support.
 
 # Following messages for InstallException
-ERROR_FAILED_TO_RESOLVE_FEATURES=CWWKF1203E: Unable to obtain the following features: {0}. Ensure that the features are valid for {1}.
+ERROR_FAILED_TO_RESOLVE_FEATURES=CWWKF1203E: Unable to obtain the following features: {0}. Ensure that the features are valid.
 ERROR_FAILED_TO_RESOLVE_FEATURES.explanation=The installer could not retrieve the specified features from the IBM WebSphere Liberty Repository.
-ERROR_FAILED_TO_RESOLVE_FEATURES.useraction=If specified features exist, ensure they are valid for the specified edition. 
+ERROR_FAILED_TO_RESOLVE_FEATURES.useraction=Ensure that the specified features are valid.
 
 ERROR_FAILED_TO_RESOLVE_IFIX=CWWKF1204E: Unable to obtain the following interim fixes: {0}. Ensure that the system can access the IBM WebSphere Liberty Repository and that the interim fix ID''s are correct.
 ERROR_FAILED_TO_RESOLVE_IFIX.explanation=The installer could not retrieve the interim fixes from the IBM WebSphere Liberty Repository.
@@ -433,6 +433,10 @@ ERROR_EXTENSION_FROM_ASSETID_NOT_FOUND.action= If you want to install the featur
 ERROR_NON_FEATURE_CANNOT_INSTALL_TO_EXTENSION=CWWKF1298E: {0} is not a feature and therefore cannot be installed on a product extension. Run the command without specifying the extension.
 ERROR_NON_FEATURE_CANNOT_INSTALL_TO_EXTENSION.explanation=Only features can be installed on a product extension.
 ERROR_NON_FEATURE_CANNOT_INSTALL_TO_EXTENSION.action=Run the installUtility install command again without specifying the extension.
+
+ERROR_FAILED_TO_RESOLVE_FEATURES_FOR_OPEN_LIBERTY=CWWKF1299E:Unable to obtain the following features: {0}. Ensure that the features are valid for Open Liberty.
+ERROR_FAILED_TO_RESOLVE_FEATURES_FOR_OPEN_LIBERTY.explanation=The installer could not retrieve the specified features from the connected repositories.
+ERROR_FAILED_TO_RESOLVE_FEATURES_FOR_OPEN_LIBERTY.useraction=If specified features exist, ensure they are valid for Open Liberty.
 
 # Following messages for info logging purpose
 LOG_INSTALL_FEATURES=CWWKF1300I: Installing the following features: {0}.
