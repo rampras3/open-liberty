@@ -624,15 +624,6 @@ class ResolveDirector extends AbstractDirector {
         } catch (Exception e) {
             throw ExceptionUtils.create(e);
         }
-        try {
-            for (ProductInfo productInfo : ProductInfo.getAllProductInfo().values()) {
-                if (productInfo.getReplacedBy() == null && productInfo.getId().equals("io.openliberty")) {
-                    isOpenLiberty = true;
-                }
-            }
-        } catch (Exception e) {
-            throw ExceptionUtils.create(e);
-        }
 
         RepositoryResolver resolver;
         Collection<List<RepositoryResource>> installResources;
